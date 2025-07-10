@@ -1,103 +1,103 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、Claude Code (claude.ai/code) がこのリポジトリのコードを扱う際のガイダンスを提供します。
 
-## Project Overview
+## プロジェクト概要
 
-ソーシャルスタディAI - A Flutter-based educational app for Japanese middle school students studying social studies (history, geography, civics). The app uses Google Gemini AI for personalized learning experiences.
+ソーシャルスタディAI - 日本の中学生向けの社会科（歴史、地理、公民）学習アプリ。Google Gemini AIを活用してパーソナライズされた学習体験を提供するFlutterベースの教育アプリケーションです。
 
-## Development Commands
+## 開発コマンド
 
-### Running the Application
+### アプリケーションの実行
 ```bash
-# Run on connected device or emulator
+# 接続されたデバイスまたはエミュレータで実行
 flutter run
 
-# Run on specific device
+# 特定のデバイスで実行
 flutter run -d <device_id>
 
-# List available devices
+# 利用可能なデバイスを一覧表示
 flutter devices
 
-# Run in release mode
+# リリースモードで実行
 flutter run --release
 
-# Run with hot reload disabled
+# ホットリロードを無効にして実行
 flutter run --no-hot
 ```
 
-### Building the Application
+### アプリケーションのビルド
 ```bash
 # Android
 flutter build apk
 flutter build appbundle
 
-# iOS (macOS only)
+# iOS (macOSのみ)
 flutter build ios
 
 # Web
 flutter build web
 
-# Desktop
+# デスクトップ
 flutter build macos
 flutter build windows
 flutter build linux
 ```
 
-### Code Quality & Testing
+### コード品質とテスト
 ```bash
-# Run tests
+# テストを実行
 flutter test
 
-# Run specific test file
+# 特定のテストファイルを実行
 flutter test test/widget_test.dart
 
-# Run tests with coverage
+# カバレッジ付きでテストを実行
 flutter test --coverage
 
-# Analyze code
+# コードを分析
 flutter analyze
 
-# Format code
+# コードをフォーマット
 dart format .
 
-# Check formatting without applying
+# フォーマットをチェック（適用なし）
 dart format --set-exit-if-changed .
 ```
 
-### Dependency Management
+### 依存関係の管理
 ```bash
-# Get dependencies
+# 依存関係を取得
 flutter pub get
 
-# Upgrade dependencies
+# 依存関係をアップグレード
 flutter pub upgrade
 
-# Add a dependency
+# 依存関係を追加
 flutter pub add <package_name>
 
-# Add dev dependency
+# 開発用依存関係を追加
 flutter pub add --dev <package_name>
 ```
 
-### Firebase Commands
+### Firebaseコマンド
 ```bash
-# Deploy Firebase functions
+# Firebase Functionsをデプロイ
 firebase deploy --only functions
 
-# Deploy Firestore rules
+# Firestoreルールをデプロイ
 firebase deploy --only firestore:rules
 
-# Deploy to hosting
+# ホスティングにデプロイ
 firebase deploy --only hosting
 
-# Emulator suite
+# エミュレータスイート
 firebase emulators:start
 ```
 
-## Architecture
+## アーキテクチャ
 
-### Directory Structure
+### ディレクトリ構造
 ```
 lib/
 ├── main.dart                  # アプリのエントリーポイント
@@ -119,7 +119,7 @@ lib/
 └── utils/                     # ユーティリティ関数
 ```
 
-### Key Dependencies (from design document)
+### 主要な依存関係（設計書より）
 ```yaml
 dependencies:
   flutter: ^3.0.0
@@ -129,111 +129,117 @@ dependencies:
   google_generative_ai: ^0.2.0
   fl_chart: ^0.60.0
   cached_network_image: ^3.2.0
-  flutter_dotenv: # For environment variables
-  google_mobile_ads: # For AdMob integration
+  flutter_dotenv: # 環境変数用
+  google_mobile_ads: # AdMob統合用
 ```
 
-## Important Development Guidelines
+## 重要な開発ガイドライン
 
-### 1. Environment Configuration
-- **Never hardcode API keys or sensitive data**
-- Use `.env` file for local development
-- Ensure `.env` is in `.gitignore`
-- Load environment variables using `flutter_dotenv`
+### 1. 環境設定
+- **APIキーや機密データは絶対にハードコードしない**
+- ローカル開発には`.env`ファイルを使用
+- `.env`が`.gitignore`に含まれていることを確認
+- `flutter_dotenv`を使用して環境変数を読み込む
 
-Example `.env` file:
+`.env`ファイルの例：
 ```
 GEMINI_API_KEY=your_gemini_api_key
 FIREBASE_API_KEY=your_firebase_api_key
 ADMOB_APP_ID=your_admob_app_id
 ```
 
-### 2. Firebase Security Rules
-- Implement proper security rules in `firestore.rules`
-- Test rules using Firebase emulator suite
-- Ensure user data isolation
+### 2. Firebaseセキュリティルール
+- `firestore.rules`に適切なセキュリティルールを実装
+- Firebaseエミュレータスイートを使用してルールをテスト
+- ユーザーデータの分離を確保
 
-### 3. AI Cost Management
-- Cache AI-generated content in Firestore
-- Implement rate limiting for API calls
-- Use batch processing for content generation
-- Monitor API usage through logging
+### 3. AIコスト管理
+- AI生成コンテンツをFirestoreにキャッシュ
+- APIコールのレート制限を実装
+- コンテンツ生成にはバッチ処理を使用
+- ロギングを通じてAPI使用量を監視
 
-### 4. Data Models
+### 4. データモデル
 
-Key data structures from design document:
+設計書からの主要なデータ構造：
 
-**User Model**:
-- userId, name, grade (1-3)
-- learningStreak, totalPoints, level
-- createdAt timestamp
+**ユーザーモデル**：
+- userId、name、grade（1-3）
+- learningStreak、totalPoints、level
+- createdAtタイムスタンプ
 
-**Learning Session**:
-- sessionId, userId
-- subject (history|geography|civics)
-- questions array with correctness and time spent
-- timestamp, totalScore
+**学習セッション**：
+- sessionId、userId
+- subject（history|geography|civics）
+- 正誤と所要時間を含むquestions配列
+- timestamp、totalScore
 
-**Question Model**:
-- questionId, subject, category
-- difficulty (easy|medium|hard)
-- question text, options array
-- correctAnswer index, explanation
-- isAIGenerated flag, tags
+**問題モデル**：
+- questionId、subject、category
+- difficulty（easy|medium|hard）
+- 問題文、選択肢配列
+- 正解インデックス、解説
+- isAIGeneratedフラグ、タグ
 
-### 5. Git Workflow
-- Feature branches: `feature/functionality-name`
-- Bug fixes: `bugfix/issue-description`
-- Commit messages should be descriptive
-- Always ensure sensitive data is gitignored
+### 5. Gitワークフロー
+- 機能ブランチ：`feature/機能名`
+- バグ修正：`bugfix/問題の説明`
+- コミットメッセージは説明的に
+- 機密データが常にgitignoreされていることを確認
 
-### 6. Testing Strategy
-- Unit tests for all services and utilities
-- Widget tests for UI components
-- Integration tests for critical user flows
-- Test AI prompt responses with mock data
+### 6. テスト戦略
+- すべてのサービスとユーティリティのユニットテスト
+- UIコンポーネントのウィジェットテスト
+- 重要なユーザーフローの統合テスト
+- モックデータを使用したAIプロンプト応答のテスト
 
-### 7. Performance Considerations
-- Lazy load images with `cached_network_image`
-- Implement pagination for question lists
-- Use StreamBuilder for real-time updates
-- Optimize Firestore queries with proper indexing
+### 7. パフォーマンスの考慮事項
+- `cached_network_image`で画像を遅延読み込み
+- 問題リストのページネーションを実装
+- リアルタイム更新にはStreamBuilderを使用
+- 適切なインデックスでFirestoreクエリを最適化
 
-### 8. Monetization Implementation
-- Free tier: 10 questions/day with ads
-- Premium tier: ¥500/month, unlimited questions, no ads
-- Implement in-app purchases for iOS/Android
-- AdMob integration for free users
+### 8. 収益化の実装
+- 無料プラン：1日10問まで、広告あり
+- プレミアムプラン：月額500円、無制限の問題、広告なし
+- iOS/Android用のアプリ内購入を実装
+- 無料ユーザー向けのAdMob統合
 
-## Development Phases (from design document)
+## 開発フェーズ（設計書より）
 
-1. **Month 1**: Firebase setup, basic UI, auth, basic question system
-2. **Month 2**: Gemini API integration, question generation, learning analytics
-3. **Month 3**: Performance optimization, UI/UX improvements, store preparation
+1. **1ヶ月目**：Firebase設定、基本UI、認証、基本的な問題システム
+2. **2ヶ月目**：Gemini API統合、問題生成、学習分析
+3. **3ヶ月目**：パフォーマンス最適化、UI/UX改善、ストア準備
 
-## Common Tasks
+## 一般的なタスク
 
-### Adding a new screen
-1. Create directory under `lib/screens/`
-2. Follow existing screen structure pattern
-3. Add route in main.dart or router configuration
-4. Implement proper state management
+### 新しい画面の追加
+1. `lib/screens/`配下にディレクトリを作成
+2. 既存の画面構造パターンに従う
+3. main.dartまたはルーター設定にルートを追加
+4. 適切な状態管理を実装
 
-### Integrating new AI feature
-1. Add prompt template in `lib/utils/prompts.dart`
-2. Implement service method in `gemini_service.dart`
-3. Add caching logic to reduce API calls
-4. Implement error handling and fallbacks
+### 新しいAI機能の統合
+1. `lib/utils/prompts.dart`にプロンプトテンプレートを追加
+2. `gemini_service.dart`にサービスメソッドを実装
+3. APIコールを削減するためのキャッシュロジックを追加
+4. エラーハンドリングとフォールバックを実装
 
-### Adding new question type
-1. Update question model if needed
-2. Create UI widget for the question type
-3. Update answer validation logic
-4. Add to question generation prompts
+### 新しい問題タイプの追加
+1. 必要に応じて問題モデルを更新
+2. 問題タイプ用のUIウィジェットを作成
+3. 回答検証ロジックを更新
+4. 問題生成プロンプトに追加
 
-## Debugging Tips
+## デバッグのヒント
 
-- Use Flutter DevTools for performance profiling
-- Check Firebase console for Firestore usage
-- Monitor Gemini API dashboard for usage/costs
-- Use `flutter logs` for device logging
+- パフォーマンスプロファイリングにはFlutter DevToolsを使用
+- Firestore使用状況はFirebaseコンソールで確認
+- Gemini APIダッシュボードで使用量/コストを監視
+- デバイスログには`flutter logs`を使用
+
+# 重要な指示のリマインダー
+求められたことだけを実行し、それ以上でもそれ以下でもない。
+目標達成に絶対必要でない限り、ファイルを作成しない。
+新しいファイルを作成するよりも、既存のファイルの編集を常に優先する。
+ドキュメントファイル（*.md）やREADMEファイルを自発的に作成しない。ユーザーから明示的に要求された場合のみドキュメントファイルを作成する。

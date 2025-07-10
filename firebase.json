@@ -1,0 +1,41 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "social-study-ai",
+                    "appId": "1:1062539815128:android:3f905b929022ae307acfad",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "social-study-ai",
+                    "appId": "1:1062539815128:ios:91dbd62504e4e3c67acfad",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "macos": {
+                "default": {
+                    "projectId": "social-study-ai",
+                    "appId": "1:1062539815128:ios:91dbd62504e4e3c67acfad",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "macos/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "social-study-ai",
+                    "configurations": {
+                        "android": "1:1062539815128:android:3f905b929022ae307acfad",
+                        "ios": "1:1062539815128:ios:91dbd62504e4e3c67acfad",
+                        "macos": "1:1062539815128:ios:91dbd62504e4e3c67acfad",
+                        "web": "1:1062539815128:web:bf43fc35f14ec91e7acfad",
+                        "windows": "1:1062539815128:web:590faf635eb3acd07acfad"
+                    }
+                }
+            }
+        }
+    }
+}

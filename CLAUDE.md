@@ -30,20 +30,6 @@ lib/
 └── utils/                     # ユーティリティ関数
 ```
 
-### 主要な依存関係（設計書より）
-```yaml
-dependencies:
-  flutter: ^3.0.0
-  firebase_core: ^2.0.0
-  cloud_firestore: ^4.0.0
-  firebase_auth: ^4.0.0
-  google_generative_ai: ^0.2.0
-  fl_chart: ^0.60.0
-  cached_network_image: ^3.2.0
-  flutter_dotenv: # 環境変数用
-  google_mobile_ads: # AdMob統合用
-```
-
 ## 重要な開発ガイドライン
 
 ### 1. 環境設定
@@ -141,6 +127,10 @@ ADMOB_APP_ID=your_admob_app_id
 2. 問題タイプ用のUIウィジェットを作成
 3. 回答検証ロジックを更新
 4. 問題生成プロンプトに追加
+
+## 参照ドキュメント
+- [基本設計書](/design/01_基本設計書.md)
+- [テーブル設計書](/design/02_テーブル設計書.md)
 
 # 重要な指示のリマインダー
 求められたことだけを実行し、それ以上でもそれ以下でもない。

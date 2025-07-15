@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'ソーシャルスタディAI',
       theme: AppTheme.lightTheme,
       home: const DashboardScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -34,6 +34,10 @@ class DashboardScreen extends StatelessWidget {
             
             // 最近の学習セッション
             _buildRecentSessionsCard(context),
+            const SizedBox(height: AppSizes.paddingM),
+            
+            // 分析画面へのボタン
+            _buildAnalysisButton(context),
           ],
         ),
       ),
@@ -376,5 +380,39 @@ class DashboardScreen extends StatelessWidget {
 
   Color _getSubjectColor(String subject) {
     return AppColors.getSubjectColor(subject);
+  }
+
+  Widget _buildAnalysisButton(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/analysis');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingL),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSizes.borderRadiusM),
+          ),
+          elevation: AppSizes.cardElevation,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.analytics, size: AppSizes.iconM),
+            const SizedBox(width: AppSizes.paddingS),
+            const Text(
+              '詳細な学習分析を見る',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

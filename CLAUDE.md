@@ -12,6 +12,7 @@
 ```
 lib/
 ├── main.dart                  # アプリのエントリーポイント
+├── firebase_option.dart       # アプリのエントリーポイント
 ├── models/                    # データモデル
 │   ├── user.dart             # ユーザーモデル
 │   ├── question.dart         # 問題モデル
@@ -28,6 +29,8 @@ lib/
 │   └── auth_service.dart     # 認証サービス
 ├── providers/                 # 状態管理（Provider/Riverpod）
 └── utils/                     # ユーティリティ関数
+│   ├── app_colors.dart       # 色関連
+│   └── app_theme.dart        # テーマ関連
 ```
 
 ## 重要な開発ガイドライン
@@ -56,47 +59,7 @@ ADMOB_APP_ID=your_admob_app_id
 - コンテンツ生成にはバッチ処理を使用
 - ロギングを通じてAPI使用量を監視
 
-### 4. データモデル
-
-設計書からの主要なデータ構造：
-
-**ユーザーモデル**：
-- userId、name、grade（1-3）
-- learningStreak、totalPoints、level
-- createdAtタイムスタンプ
-
-**学習セッション**：
-- sessionId、userId
-- subject（history|geography|civics）
-- 正誤と所要時間を含むquestions配列
-- timestamp、totalScore
-
-**問題モデル**：
-- questionId、subject、category
-- difficulty（easy|medium|hard）
-- 問題文、選択肢配列
-- 正解インデックス、解説
-- isAIGeneratedフラグ、タグ
-
-### 5. Gitワークフロー
-- 機能ブランチ：`feature/機能名`
-- バグ修正：`bugfix/問題の説明`
-- コミットメッセージは説明的に
-- 機密データが常にgitignoreされていることを確認
-
-### 6. テスト戦略
-- すべてのサービスとユーティリティのユニットテスト
-- UIコンポーネントのウィジェットテスト
-- 重要なユーザーフローの統合テスト
-- モックデータを使用したAIプロンプト応答のテスト
-
-### 7. パフォーマンスの考慮事項
-- `cached_network_image`で画像を遅延読み込み
-- 問題リストのページネーションを実装
-- リアルタイム更新にはStreamBuilderを使用
-- 適切なインデックスでFirestoreクエリを最適化
-
-### 8. 収益化の実装
+### 4. 収益化の実装
 - 無料プラン：1日10問まで、広告あり
 - プレミアムプラン：月額500円、無制限の問題、広告なし
 - iOS/Android用のアプリ内購入を実装

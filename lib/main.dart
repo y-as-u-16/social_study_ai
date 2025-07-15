@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/dashboard/dashboard_screen.dart';
+import 'screens/analysis/analysis_screen.dart';
 import 'utils/app_theme.dart';
 // import 'package:provider/provider.dart';
 
@@ -28,6 +29,10 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       home: const DashboardScreen(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/dashboard': (context) => const DashboardScreen(),
+        '/analysis': (context) => const AnalysisScreen(),
+      },
     );
   }
 }

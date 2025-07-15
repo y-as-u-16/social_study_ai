@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../learning/learning_screen.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/app_theme.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -8,24 +11,26 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ダッシュボード'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppSizes.paddingM),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ユーザー情報カード
             _buildUserInfoCard(context),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.paddingM),
             
             // 学習統計カード
             _buildLearningStatsCard(context),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.paddingM),
             
             // 科目選択カード
             _buildSubjectSelectionCard(context),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.paddingM),
             
             // 最近の学習セッション
             _buildRecentSessionsCard(context),
@@ -37,41 +42,68 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildUserInfoCard(BuildContext context) {
     return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
+      elevation: AppSizes.cardElevation,
+      shadowColor: AppColors.cardShadowColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.white, Colors.grey[50]!],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.paddingL),
+          child: Row(
           children: [
-            const CircleAvatar(
-              radius: 30,
-              backgroundColor: Colors.deepPurple,
-              child: Icon(
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: AppColors.primaryGradient,
+                boxShadow: [AppColors.cardShadow],
+              ),
+              child: const Icon(
                 Icons.person,
                 size: 30,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppSizes.paddingM),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'ユーザー名',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: AppSizes.paddingXS),
                   Text(
                     '中学2年生',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: AppSizes.paddingXS),
                   Row(
                     children: [
-                      const Icon(Icons.local_fire_department, 
-                          color: Colors.orange, size: 16),
-                      const SizedBox(width: 4),
-                      Text('連続学習: 5日'),
+                      Icon(Icons.local_fire_department, 
+                          color: AppColors.warning, size: 16),
+                      const SizedBox(width: AppSizes.paddingXS),
+                      Text(
+                        '連続学習: 5日',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -83,26 +115,44 @@ class DashboardScreen extends StatelessWidget {
                 Text(
                   'Lv.12',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.deepPurple,
+                    color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text('1,250 pt'),
+                const SizedBox(height: AppSizes.paddingXS),
+                Text(
+                  '1,250 pt',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
               ],
             ),
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget _buildLearningStatsCard(BuildContext context) {
     return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+      elevation: AppSizes.cardElevation,
+      shadowColor: AppColors.cardShadowColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.white, AppColors.surfaceLight],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.paddingL),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -121,8 +171,8 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 12),
             LinearProgressIndicator(
               value: 0.8,
-              backgroundColor: Colors.grey[300],
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+              backgroundColor: AppColors.borderLight,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
             ),
             const SizedBox(height: 8),
             Text(
@@ -132,7 +182,7 @@ class DashboardScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget _buildStatItem(BuildContext context, String label, String value, String suffix) {
@@ -147,7 +197,7 @@ class DashboardScreen extends StatelessWidget {
           text: TextSpan(
             text: value,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Colors.deepPurple,
+              color: AppColors.primary,
               fontWeight: FontWeight.bold,
             ),
             children: [
@@ -164,10 +214,23 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildSubjectSelectionCard(BuildContext context) {
     return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+      elevation: AppSizes.cardElevation,
+      shadowColor: AppColors.cardShadowColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.white, AppColors.surfaceLight],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.paddingL),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -178,15 +241,15 @@ class DashboardScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildSubjectButton(context, '歴史', Icons.history_edu, Colors.blue),
-                _buildSubjectButton(context, '地理', Icons.public, Colors.green),
-                _buildSubjectButton(context, '公民', Icons.account_balance, Colors.orange),
+                _buildSubjectButton(context, '歴史', Icons.history_edu, AppColors.getSubjectColor('歴史')),
+                _buildSubjectButton(context, '地理', Icons.public, AppColors.getSubjectColor('地理')),
+                _buildSubjectButton(context, '公民', Icons.account_balance, AppColors.getSubjectColor('公民')),
               ],
             ),
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget _buildSubjectButton(BuildContext context, String subject, IconData icon, Color color) {
@@ -195,22 +258,35 @@ class DashboardScreen extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 4),
         child: ElevatedButton(
           onPressed: () {
-            // TODO: Navigate to learning screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LearningScreen(subject: subject),
+              ),
+            );
           },
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: color,
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingL),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppSizes.borderRadiusM),
             ),
+            elevation: AppSizes.cardElevation,
+            shadowColor: color.withValues(alpha: 0.3),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 32),
-              const SizedBox(height: 8),
-              Text(subject),
+              Icon(icon, size: AppSizes.iconL),
+              const SizedBox(height: AppSizes.paddingS),
+              Text(
+                subject,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ],
           ),
         ),
@@ -220,24 +296,37 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildRecentSessionsCard(BuildContext context) {
     return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+      elevation: AppSizes.cardElevation,
+      shadowColor: AppColors.cardShadowColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppSizes.borderRadiusL),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.white, AppColors.surfaceLight],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.paddingL),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               '最近の学習セッション',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.paddingM),
             _buildSessionItem(context, '歴史', '江戸時代', '85%', '今日'),
             _buildSessionItem(context, '地理', '日本の地形', '92%', '昨日'),
             _buildSessionItem(context, '公民', '基本的人権', '78%', '2日前'),
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget _buildSessionItem(BuildContext context, String subject, String topic, String score, String date) {
@@ -277,7 +366,7 @@ class DashboardScreen extends StatelessWidget {
             score,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
+              color: AppColors.primary,
             ),
           ),
         ],
@@ -286,15 +375,6 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Color _getSubjectColor(String subject) {
-    switch (subject) {
-      case '歴史':
-        return Colors.blue;
-      case '地理':
-        return Colors.green;
-      case '公民':
-        return Colors.orange;
-      default:
-        return Colors.grey;
-    }
+    return AppColors.getSubjectColor(subject);
   }
 }
